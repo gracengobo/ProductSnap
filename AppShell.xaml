@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:ProductSnap.Maui.Views"
+       x:Class="ProductSnap.Maui.AppShell"
+       Shell.FlyoutBehavior="Disabled"
+       BackgroundColor="#F9F9FF">
+
+    <!-- Écrans d'authentification (pas d'onglets) -->
+    <ShellContent Route="connexion"
+                   ContentTemplate="{DataTemplate views:ConnexionPage}"
+                   Shell.NavBarIsVisible="False" />
+
+    <ShellContent Route="inscription"
+                   ContentTemplate="{DataTemplate views:InscriptionPage}"
+                   Shell.NavBarIsVisible="False" />
+
+    <!-- Onglets principaux de l'application -->
+    <TabBar Route="main">
+
+        <Tab Title="Accueil" Icon="home.png">
+            <ShellContent Route="accueil"
+                           ContentTemplate="{DataTemplate views:AccueilPage}" />
+        </Tab>
+
+        <Tab Title="Scan" Icon="scan.png">
+            <ShellContent Route="scanner"
+                           ContentTemplate="{DataTemplate views:ScannerPage}" />
+        </Tab>
+
+        <Tab Title="Ventes" Icon="sales.png">
+            <ShellContent Route="historiqueVentes"
+                           ContentTemplate="{DataTemplate views:HistoriqueVentesPage}" />
+        </Tab>
+
+        <Tab Title="Profil" Icon="profile.png">
+            <ShellContent Route="profil"
+                           ContentTemplate="{DataTemplate views:ProfilPage}" />
+        </Tab>
+
+    </TabBar>
+
+</Shell>
