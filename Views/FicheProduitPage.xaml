@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             xmlns:models="clr-namespace:ProductSnap.Maui.Models"
+             x:Class="ProductSnap.Maui.Views.FicheProduitPage"
+             x:DataType="vm:FicheProduitViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Image produit -->
+                <Border HeightRequest="180"
+                        BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 0,0,16,16">
+                    <Grid>
+                        <Label Text="🌾" FontSize="72"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+
+                        <!-- Badge reconnaissance -->
+                        <Border BackgroundColor="{StaticResource Success}"
+                                StrokeThickness="0" Padding="10,4"
+                                HorizontalOptions="Start" VerticalOptions="Start"
+                                Margin="12"
+                                StrokeShape="RoundRectangle 20">
+                            <Label Text="✓ Reconnu 98%" TextColor="White"
+                                   FontSize="11" FontAttributes="Bold" />
+                        </Border>
+
+                        <!-- Bouton fermer -->
+                        <Button Text="✖"
+                                Command="{Binding FermerCommand}"
+                                BackgroundColor="#CCFFFFFF"
+                                TextColor="{StaticResource OnSurface}"
+                                FontSize="16"
+                                WidthRequest="36" HeightRequest="36"
+                                CornerRadius="18"
+                                HorizontalOptions="End" VerticalOptions="Start"
+                                Margin="12" />
+                    </Grid>
+                </Border>
+
+                <!-- Carte info produit -->
+                <Border Style="{StaticResource Card}" Margin="16,12,16,0">
+                    <VerticalStackLayout Spacing="12">
+
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding ProduitNom}" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="{Binding Categorie}" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+
+                        <!-- Prix effectif -->
+                        <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                StrokeThickness="0" Padding="12"
+                                StrokeShape="RoundRectangle 10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="PRIX DE VENTE EFFECTIF (FIFO)"
+                                       FontSize="10" FontAttributes="Bold"
+                                       TextColor="{StaticResource Secondary}" />
+                                <Label Text="{Binding PrixEffectif, StringFormat='{0:N0} F CFA'}"
+                                       FontSize="28" FontAttributes="Bold"
+                                       TextColor="{StaticResource Primary}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Titre lots -->
+                        <Label Text="Lots en stock" Style="{StaticResource H2}" />
+
+                        <!-- Liste des lots -->
+                        <CollectionView ItemsSource="{Binding Lots}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Lot">
+                                    <Border Style="{StaticResource Card}" Margin="0,0,0,8">
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                            <Ellipse Grid.Column="0"
+                                                     Fill="{StaticResource Secondary}"
+                                                     WidthRequest="14" HeightRequest="14"
+                                                     VerticalOptions="Start" Margin="0,4,0,0" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                                <Label Text="{Binding Reference}"
+                                                       FontSize="13" FontAttributes="Bold" />
+                                                <Label Text="{Binding Badge}"
+                                                       FontSize="10"
+                                                       TextColor="{StaticResource Success}" />
+                                                <Label Text="{Binding Quantite, StringFormat='{0} unités'}"
+                                                       Style="{StaticResource Caption}" />
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="2"
+                                                   Text="{Binding PrixUnitaire, StringFormat='{0:N0} F'}"
+                                                   FontSize="14" FontAttributes="Bold"
+                                                   TextColor="{StaticResource Primary}"
+                                                   VerticalOptions="Start" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- Sélecteur quantité -->
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,8">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="Quantité à vendre" FontAttributes="Bold" FontSize="13" />
+                                <Label Text="{Binding MaxStock, StringFormat='Max dispo: {0}'}"
+                                       Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                                <Button Text="−" Command="{Binding DiminuerCommand}"
+                                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                        TextColor="{StaticResource Primary}"
+                                        WidthRequest="44" HeightRequest="44"
+                                        CornerRadius="10" FontSize="20" />
+                                <Label Text="{Binding Quantite}"
+                                       FontSize="20" FontAttributes="Bold"
+                                       WidthRequest="40" HorizontalTextAlignment="Center"
+                                       VerticalOptions="Center" />
+                                <Button Text="+" Command="{Binding AugmenterCommand}"
+                                        BackgroundColor="{StaticResource Secondary}"
+                                        TextColor="White"
+                                        WidthRequest="44" HeightRequest="44"
+                                        CornerRadius="10" FontSize="20" />
+                            </HorizontalStackLayout>
+                        </Grid>
+
+                        <!-- Total -->
+                        <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                StrokeThickness="0" Padding="12,10"
+                                StrokeShape="RoundRectangle 10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Total à payer"
+                                       FontAttributes="Bold" VerticalOptions="Center" />
+                                <Border Grid.Column="1" BackgroundColor="{StaticResource TertiaryContainer}"
+                                        StrokeThickness="0" Padding="10,5"
+                                        StrokeShape="RoundRectangle 8">
+                                    <Label Text="{Binding Total, StringFormat='{0:N0} FCFA'}"
+                                           TextColor="{StaticResource TertiaryFixed}"
+                                           FontAttributes="Bold" FontSize="14" />
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Barre d'actions en bas -->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="8"
+              Padding="16,8" BackgroundColor="{StaticResource SurfaceContainerLowest}">
+            <Button Grid.Column="0" Text="Détails"
+                    Command="{Binding VoirDetailsCommand}"
+                    BackgroundColor="{StaticResource SurfaceContainerLow}"
+                    TextColor="{StaticResource Secondary}"
+                    CornerRadius="10" HeightRequest="48" Padding="16,0" />
+            <Button Grid.Column="1" Text="🛒 Enregistrer la vente"
+                    Command="{Binding EnregistrerVenteCommand}"
+                    BackgroundColor="{StaticResource TertiaryContainer}"
+                    TextColor="{StaticResource TertiaryFixed}"
+                    FontAttributes="Bold"
+                    CornerRadius="10" HeightRequest="48" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

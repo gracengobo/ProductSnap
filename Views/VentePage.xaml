@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             x:Class="ProductSnap.Maui.Views.VentePage"
+             x:DataType="vm:VenteViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- Barre supérieure -->
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Label Grid.Column="0" Text="🧾" FontSize="22"
+                       VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="Confirmer la vente"
+                       FontSize="16" FontAttributes="Bold"
+                       VerticalOptions="Center" Margin="8,0" />
+                <Button Grid.Column="2" Text="✖"
+                        Command="{Binding FermerCommand}"
+                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        TextColor="{StaticResource OnSurfaceVariant}"
+                        WidthRequest="36" HeightRequest="36"
+                        CornerRadius="18" />
+            </Grid>
+
+            <!-- Récapitulatif -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Produit"
+                               TextColor="{StaticResource OnSurfaceVariant}" />
+                        <Label Grid.Column="1" Text="{Binding NomProduit}"
+                               FontAttributes="Bold" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Lot"
+                               TextColor="{StaticResource OnSurfaceVariant}" />
+                        <Label Grid.Column="1" Text="{Binding LotReference}"
+                               FontAttributes="Bold" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Prix unitaire"
+                               TextColor="{StaticResource OnSurfaceVariant}" />
+                        <Label Grid.Column="1"
+                               Text="{Binding PrixUnitaire, StringFormat='{0:N0} FCFA'}"
+                               FontAttributes="Bold" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="Quantité"
+                               TextColor="{StaticResource OnSurfaceVariant}" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Quantite, StringFormat='{0} unités'}"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Mode de paiement -->
+            <Label Text="Mode de paiement" Style="{StaticResource H2}" />
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
+                  ColumnSpacing="10" RowSpacing="10">
+
+                <Border Grid.Row="0" Grid.Column="0"
+                        BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                        Stroke="{StaticResource Secondary}" StrokeThickness="2"
+                        Padding="12" StrokeShape="RoundRectangle 12">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChoisirEspecesCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="💵" FontSize="24" />
+                        <Label Text="Espèces" FontAttributes="Bold" />
+                        <Label Text="Rendu monnaie" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1"
+                        BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                        Stroke="{StaticResource Outline}" StrokeThickness="1"
+                        Padding="12" StrokeShape="RoundRectangle 12">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChoisirMobileMoneyCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="📱" FontSize="24" />
+                        <Label Text="Mobile Money" FontAttributes="Bold" />
+                        <Label Text="OM / MTN" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                        Stroke="{StaticResource Outline}" StrokeThickness="1"
+                        Padding="12" StrokeShape="RoundRectangle 12">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChoisirCarteCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="💳" FontSize="24" />
+                        <Label Text="Carte bancaire" FontAttributes="Bold" />
+                        <Label Text="TPE" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                        Stroke="{StaticResource Outline}" StrokeThickness="1"
+                        Padding="12" StrokeShape="RoundRectangle 12">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChoisirCreditCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="🏦" FontSize="24" />
+                        <Label Text="Crédit client" FontAttributes="Bold" />
+                        <Label Text="Différé" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Client optionnel -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Client (optionnel)" FontSize="12"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="Nom ou téléphone du client"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding Client}" />
+            </VerticalStackLayout>
+
+            <!-- Total -->
+            <Border BackgroundColor="{StaticResource TertiaryFixed}"
+                    StrokeThickness="0" Padding="16"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                    <Label Text="TOTAL À ENCAISSER"
+                           FontSize="11" FontAttributes="Bold"
+                           TextColor="#005236"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding Total, StringFormat='{0:N0} FCFA'}"
+                           FontSize="28" FontAttributes="Bold"
+                           TextColor="#002113"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Boutons -->
+            <Button Text="✓ Valider la vente"
+                    Command="{Binding ValiderCommand}"
+                    BackgroundColor="{StaticResource TertiaryContainer}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="54" />
+
+            <Button Text="Annuler la transaction"
+                    Command="{Binding FermerCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource OnSurfaceVariant}"
+                    FontSize="13" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             x:Class="ProductSnap.Maui.Views.ProfilPage"
+             x:DataType="vm:ProfilViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Header bleu -->
+            <Border BackgroundColor="{StaticResource Primary}"
+                    StrokeThickness="0" Padding="24,50,24,24">
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Border BackgroundColor="#33FFFFFF"
+                            StrokeThickness="0"
+                            WidthRequest="60" HeightRequest="60"
+                            StrokeShape="RoundRectangle 30">
+                        <Label Text="{Binding Initiale}" TextColor="White"
+                               FontSize="24" FontAttributes="Bold"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Text="{Binding Nom}" TextColor="White"
+                           FontSize="18" FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding Role}"
+                           TextColor="#CCFFFFFF"
+                           FontSize="12"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Padding="16" Spacing="16">
+
+                <Label Text="MON COMPTE" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="📧" FontSize="18" />
+                            <Label Grid.Column="1" Text="martial@boutique.cm"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20"
+                                   TextColor="{StaticResource OnSurfaceVariant}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="📱" FontSize="18" />
+                            <Label Grid.Column="1" Text="+237 6 99 12 34 56"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20"
+                                   TextColor="{StaticResource OnSurfaceVariant}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🔐" FontSize="18" />
+                            <Label Grid.Column="1" Text="Changer le mot de passe"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20"
+                                   TextColor="{StaticResource OnSurfaceVariant}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="PRÉFÉRENCES" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🌐" FontSize="18" />
+                            <Label Grid.Column="1" Text="Langue — Français"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="📶" FontSize="18" />
+                            <Label Grid.Column="1" Text="Mode hors-ligne"
+                                   VerticalOptions="Center" />
+                            <Switch Grid.Column="2" IsToggled="True"
+                                    OnColor="{StaticResource Secondary}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Grid.Column="0" Text="🔔" FontSize="18" />
+                            <Label Grid.Column="1" Text="Notifications"
+                                   VerticalOptions="Center" />
+                            <Switch Grid.Column="2" IsToggled="True"
+                                    OnColor="{StaticResource Secondary}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="🚪 Se déconnecter"
+                        Command="{Binding SeDeconnecterCommand}"
+                        BackgroundColor="{StaticResource Error}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="12"
+                        HeightRequest="54" />
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

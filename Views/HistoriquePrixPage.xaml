@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             x:Class="ProductSnap.Maui.Views.HistoriquePrixPage"
+             x:DataType="vm:HistoriquePrixViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- Barre -->
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" Text="←"
+                        Command="{Binding RetourCommand}"
+                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        TextColor="{StaticResource Primary}"
+                        WidthRequest="44" HeightRequest="44" CornerRadius="12" />
+                <Label Grid.Column="1" Text="Historique des prix"
+                       FontSize="16" FontAttributes="Bold"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+                <Button Grid.Column="2" Text="📤"
+                        Command="{Binding PartagerCommand}"
+                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        TextColor="{StaticResource Primary}"
+                        WidthRequest="44" HeightRequest="44" CornerRadius="12" />
+            </Grid>
+
+            <!-- Carte info -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Riz parfumé 5kg" FontAttributes="Bold" />
+                    <Label Text="Évolution du prix sur les 6 derniers mois"
+                           Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Graphique simple (barres empilées) -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="Prix actuel" Style="{StaticResource Caption}" />
+                            <Label Text="250 F CFA" FontSize="28" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}" />
+                        </VerticalStackLayout>
+                        <Border Grid.Column="1" BackgroundColor="{StaticResource TertiaryFixed}"
+                                StrokeThickness="0" Padding="8,4"
+                                StrokeShape="RoundRectangle 12"
+                                VerticalOptions="Center">
+                            <Label Text="↗ +38%" FontSize="11"
+                                   TextColor="#005236" FontAttributes="Bold" />
+                        </Border>
+                    </Grid>
+
+                    <!-- Barres -->
+                    <Grid ColumnDefinitions="*,*,*,*,*,*" ColumnSpacing="4" HeightRequest="120">
+                        <VerticalStackLayout Grid.Column="0" VerticalOptions="End">
+                            <Label Text="180" FontSize="10" HorizontalOptions="Center" />
+                            <BoxView HeightRequest="60" Color="{StaticResource SurfaceContainerHigh}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Avr" FontSize="10" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="End">
+                            <Label Text="180" FontSize="10" HorizontalOptions="Center" />
+                            <BoxView HeightRequest="60" Color="{StaticResource SurfaceContainerHigh}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Mai" FontSize="10" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2" VerticalOptions="End">
+                            <Label Text="200" FontSize="10" HorizontalOptions="Center" />
+                            <BoxView HeightRequest="70" Color="{StaticResource SurfaceContainerHigh}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Juin" FontSize="10" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="3" VerticalOptions="End">
+                            <Label Text="200" FontSize="10" HorizontalOptions="Center" />
+                            <BoxView HeightRequest="70" Color="{StaticResource SurfaceContainerHigh}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Juil" FontSize="10" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="4" VerticalOptions="End">
+                            <Label Text="220" FontSize="10" HorizontalOptions="Center" />
+                            <BoxView HeightRequest="85" Color="{StaticResource SurfaceContainerHigh}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Août" FontSize="10" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="5" VerticalOptions="End">
+                            <Label Text="250" FontSize="10" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   HorizontalOptions="Center" />
+                            <BoxView HeightRequest="110" Color="{StaticResource Primary}"
+                                     CornerRadius="4" HorizontalOptions="Fill" />
+                            <Label Text="Sept" FontSize="10" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Changements -->
+            <Label Text="Détail chronologique des changements" Style="{StaticResource H2}" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="23/09/2025" Style="{StaticResource Caption}" />
+                        <Label Grid.Column="1" Text="200 F → 250 F"
+                               TextColor="{StaticResource Success}"
+                               FontAttributes="Bold" FontSize="12" />
+                    </Grid>
+                    <Label Text="Nouvel arrivage fournisseur SABC" FontAttributes="Bold" />
+                    <Label Text="Modifié par Martial" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="15/09/2025" Style="{StaticResource Caption}" />
+                        <Label Grid.Column="1" Text="220 F → 200 F"
+                               TextColor="{StaticResource Error}"
+                               FontAttributes="Bold" FontSize="12" />
+                    </Grid>
+                    <Label Text="Promotion temporaire" FontAttributes="Bold" />
+                    <Label Text="Modifié par Gérant" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="📥 Exporter le rapport (CSV / PDF)"
+                    Command="{Binding ExporterCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="54" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

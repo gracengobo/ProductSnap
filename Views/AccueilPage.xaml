@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             xmlns:models="clr-namespace:ProductSnap.Maui.Models"
+             x:Class="ProductSnap.Maui.Views.AccueilPage"
+             x:DataType="vm:AccueilViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- HEADER -->
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
+                <Border Grid.Column="0" BackgroundColor="{StaticResource Primary}"
+                        WidthRequest="36" HeightRequest="36"
+                        StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                    <Label Text="📷" FontSize="18"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Label Grid.Column="1" Text="ProductSnap"
+                       FontSize="18" FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="2" Text="🔔"
+                        Command="{Binding OuvrirNotificationsCommand}"
+                        BackgroundColor="Transparent" FontSize="20"
+                        WidthRequest="44" HeightRequest="44" />
+                <Border Grid.Column="3" BackgroundColor="{StaticResource Primary}"
+                        WidthRequest="36" HeightRequest="36"
+                        StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                    <Label Text="{Binding Initiale}" TextColor="White"
+                           FontAttributes="Bold" FontSize="16"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+            </Grid>
+
+            <!-- BANNIÈRE SALUTATION -->
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Grid Grid.Column="0">
+                        <Border BackgroundColor="{StaticResource Primary}"
+                                WidthRequest="48" HeightRequest="48"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 24">
+                            <Label Text="{Binding Initiale}" TextColor="White"
+                                   FontAttributes="Bold" FontSize="18"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Ellipse Fill="#10B981" WidthRequest="12" HeightRequest="12"
+                                 HorizontalOptions="End" VerticalOptions="End" />
+                    </Grid>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource OnSurface}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Bonjour, " />
+                                    <Span Text="{Binding UserName}" />
+                                    <Span Text="  👋" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <HorizontalStackLayout Spacing="4">
+                            <Label Text="🏪" FontSize="14" />
+                            <Label Text="{Binding Boutique}" Style="{StaticResource Caption}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="2" BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                            WidthRequest="40" HeightRequest="40"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                        <Label Text="🔔" FontSize="18"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- BANDEAU STATS -->
+            <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                    StrokeThickness="0" Padding="12,8"
+                    StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <HorizontalStackLayout Grid.Column="0" Spacing="8" VerticalOptions="Center">
+                        <Ellipse Fill="#4EDEA3" WidthRequest="10" HeightRequest="10" />
+                        <Label Text="CAISSE OUVERTE"
+                               FontSize="11" FontAttributes="Bold"
+                               TextColor="{StaticResource OnSurfaceVariant}" />
+                    </HorizontalStackLayout>
+                    <Label Grid.Column="2" Text="{Binding CaJour}"
+                           FontSize="12" FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- TITRE ACTIONS -->
+            <Label Text="Que voulez-vous faire ?" Style="{StaticResource H2}" />
+
+            <!-- GRILLE 2x2 -->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12" RowSpacing="12">
+
+                <!-- Tuile 1 : Scanner -->
+                <Border Grid.Row="0" Grid.Column="0" HeightRequest="136"
+                        StrokeThickness="0" Padding="14"
+                        StrokeShape="RoundRectangle 14">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllerScannerCommand}" />
+                    </Border.GestureRecognizers>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1E3A8A" Offset="0.0" />
+                            <GradientStop Color="#2170E4" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Border Grid.Row="0" BackgroundColor="#33FFFFFF"
+                                WidthRequest="40" HeightRequest="40"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="📷" FontSize="20"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Row="2" Spacing="2">
+                            <Label Text="Scanner" TextColor="White"
+                                   FontSize="18" FontAttributes="Bold" />
+                            <Label Text="Identifier par photo"
+                                   TextColor="#90A8FF" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Tuile 2 : Vendre -->
+                <Border Grid.Row="0" Grid.Column="1" HeightRequest="136"
+                        StrokeThickness="0" Padding="14"
+                        StrokeShape="RoundRectangle 14">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllerVendreCommand}" />
+                    </Border.GestureRecognizers>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#004A31" Offset="0.0" />
+                            <GradientStop Color="#10B981" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Border Grid.Row="0" BackgroundColor="#33FFFFFF"
+                                WidthRequest="40" HeightRequest="40"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="💰" FontSize="20"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Row="2" Spacing="2">
+                            <Label Text="Vendre" TextColor="White"
+                                   FontSize="18" FontAttributes="Bold" />
+                            <Label Text="Enregistrer vente"
+                                   TextColor="#6FFBBE" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Tuile 3 : Rechercher -->
+                <Border Grid.Row="1" Grid.Column="0" HeightRequest="136"
+                        Style="{StaticResource Card}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllerRechercheCommand}" />
+                    </Border.GestureRecognizers>
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Border Grid.Row="0" BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                                WidthRequest="40" HeightRequest="40"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="🔍" FontSize="20"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Row="2" Spacing="2">
+                            <Label Text="Rechercher" Style="{StaticResource H2}" />
+                            <Label Text="Par nom ou CB" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Tuile 4 : Mon stock -->
+                <Border Grid.Row="1" Grid.Column="1" HeightRequest="136"
+                        Style="{StaticResource Card}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllerStockCommand}" />
+                    </Border.GestureRecognizers>
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <Border Grid.Row="0" BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                                WidthRequest="40" HeightRequest="40"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="📦" FontSize="20"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Row="2" Spacing="2">
+                            <Label Text="Mon stock" Style="{StaticResource H2}" />
+                            <Label Text="{Binding NbReferences, StringFormat='{0} références'}"
+                                   Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- DERNIÈRES VENTES -->
+            <Label Text="Dernières ventes" Style="{StaticResource H2}" />
+
+            <CollectionView ItemsSource="{Binding DernieresVentes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Vente">
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,8">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Border Grid.Column="0"
+                                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                        WidthRequest="44" HeightRequest="44"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                                    <Label Text="{Binding Emoji}" FontSize="20"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding NomProduit}"
+                                           FontSize="14" FontAttributes="Bold" />
+                                    <Label Text="{Binding Minutes, StringFormat='Il y a {0} min'}"
+                                           Style="{StaticResource Caption}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" Spacing="2" HorizontalOptions="End">
+                                    <Border BackgroundColor="{StaticResource TertiaryFixed}"
+                                            StrokeThickness="0" Padding="8,3"
+                                            StrokeShape="RoundRectangle 8">
+                                        <Label Text="{Binding Montant, StringFormat='+{0:N0} F'}"
+                                               FontSize="11" FontAttributes="Bold"
+                                               TextColor="#005236" />
+                                    </Border>
+                                    <Label Text="{Binding ModePaiement}"
+                                           Style="{StaticResource Caption}"
+                                           HorizontalOptions="End" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

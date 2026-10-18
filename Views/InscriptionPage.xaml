@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             x:Class="ProductSnap.Maui.Views.InscriptionPage"
+             x:DataType="vm:InscriptionViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- Barre supérieure -->
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" Text="←"
+                        Command="{Binding RetourCommand}"
+                        BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        TextColor="{StaticResource Primary}"
+                        FontSize="20" WidthRequest="44" HeightRequest="44"
+                        CornerRadius="22" />
+                <Label Grid.Column="1" Text="Créer un compte"
+                       FontSize="18" FontAttributes="Bold"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Grid.Column="2" Text="❓" FontSize="20"
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <!-- En-tête info -->
+            <Border Style="{StaticResource Card}" Padding="14">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border Grid.Column="0" BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                            WidthRequest="48" HeightRequest="48"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                        <Label Text="📷" FontSize="22"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="Rejoignez ProductSnap" FontSize="15" FontAttributes="Bold" />
+                        <Label Text="Remplissez le formulaire ci-dessous"
+                               Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                    <Border Grid.Column="2" BackgroundColor="{StaticResource TertiaryFixed}"
+                            StrokeThickness="0" Padding="8,3"
+                            StrokeShape="RoundRectangle 12">
+                        <Label Text="PRO" FontSize="10" FontAttributes="Bold" TextColor="#005236" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Champ Nom -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="NOM COMPLET *" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="Martial Kamga"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding Nom}" />
+            </VerticalStackLayout>
+
+            <!-- Champ Email -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="EMAIL *" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="martial@boutique.cm"
+                       Keyboard="Email"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding Email}" />
+            </VerticalStackLayout>
+
+            <!-- Champ Téléphone -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="TÉLÉPHONE *" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="+237 699 12 34 56"
+                       Keyboard="Telephone"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding Telephone}" />
+            </VerticalStackLayout>
+
+            <!-- Champ Mot de passe -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="MOT DE PASSE *" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="••••••••••••"
+                       IsPassword="True"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding MotDePasse}" />
+            </VerticalStackLayout>
+
+            <!-- Champ Confirmation -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="CONFIRMER LE MOT DE PASSE *" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Entry Placeholder="••••••••••••"
+                       IsPassword="True"
+                       BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                       Text="{Binding ConfirmationMotDePasse}" />
+                <Label Text="{Binding MessageConfirmation}"
+                       FontSize="11"
+                       TextColor="{Binding CouleurConfirmation}"
+                       IsVisible="{Binding HasMessageConfirmation}" />
+            </VerticalStackLayout>
+
+            <!-- Champ Boutique -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="BOUTIQUE" FontSize="11" FontAttributes="Bold"
+                       TextColor="{StaticResource OnSurfaceVariant}" />
+                <Picker BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                        Title="Choisir une boutique"
+                        SelectedItem="{Binding BoutiqueSelectionnee}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Boutique Centrale - Akwa</x:String>
+                            <x:String>Boutique Express - Bonanjo</x:String>
+                            <x:String>Boutique Bastos - Yaoundé</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <!-- Case à cocher CGU -->
+            <HorizontalStackLayout Spacing="8" Margin="0,4">
+                <CheckBox IsChecked="{Binding AccepteCGU}"
+                          Color="{StaticResource Primary}" />
+                <Label Text="J'accepte les conditions d'utilisation"
+                       FontSize="12"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Bouton principal -->
+            <Button Text="✓ Créer mon compte"
+                    Command="{Binding CreerCompteCommand}"
+                    BackgroundColor="{StaticResource Success}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="54" />
+
+            <!-- Lien connexion -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label Text="Déjà inscrit ?"
+                       FontSize="13" TextColor="{StaticResource OnSurfaceVariant}" />
+                <Label Text="Se connecter"
+                       FontSize="13" FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RetourCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

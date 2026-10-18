@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProductSnap.Maui.ViewModels"
+             xmlns:models="clr-namespace:ProductSnap.Maui.Models"
+             x:Class="ProductSnap.Maui.Views.RecherchePage"
+             x:DataType="vm:RechercheViewModel"
+             BackgroundColor="{StaticResource Surface}"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <!-- Barre de recherche -->
+        <Border BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                StrokeThickness="0" Padding="12,4"
+                StrokeShape="RoundRectangle 12">
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
+                <Label Grid.Column="0" Text="🔍" FontSize="18"
+                       VerticalOptions="Center" />
+                <Entry Grid.Column="1" Placeholder="Nom, code-barres, catégorie..."
+                       Text="{Binding Recherche}"
+                       BackgroundColor="Transparent" />
+                <Label Grid.Column="2" Text="🎤" FontSize="18"
+                       VerticalOptions="Center" />
+                <Label Grid.Column="3" Text="📷" FontSize="18"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+        <!-- Chips catégories -->
+        <ScrollView Orientation="Horizontal">
+            <HorizontalStackLayout Spacing="8">
+                <Border BackgroundColor="{StaticResource Primary}"
+                        StrokeThickness="0" Padding="14,6"
+                        StrokeShape="RoundRectangle 16">
+                    <Label Text="Tous" TextColor="White"
+                           FontSize="12" FontAttributes="Bold" />
+                </Border>
+                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        StrokeThickness="0" Padding="14,6"
+                        StrokeShape="RoundRectangle 16">
+                    <Label Text="Alimentaire" FontSize="12" />
+                </Border>
+                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        StrokeThickness="0" Padding="14,6"
+                        StrokeShape="RoundRectangle 16">
+                    <Label Text="Boisson" FontSize="12" />
+                </Border>
+                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                        StrokeThickness="0" Padding="14,6"
+                        StrokeShape="RoundRectangle 16">
+                    <Label Text="Hygiène" FontSize="12" />
+                </Border>
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Compteur -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Grid.Column="0"
+                   Text="{Binding NbResultats, StringFormat='{0} articles répertoriés'}"
+                   FontSize="11" FontAttributes="Bold"
+                   TextColor="{StaticResource OnSurfaceVariant}" />
+            <Label Grid.Column="1" Text="Tri standard"
+                   FontSize="11" TextColor="{StaticResource Secondary}" />
+        </Grid>
+
+        <!-- Liste produits -->
+        <CollectionView ItemsSource="{Binding Produits}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Produit">
+                    <Border Style="{StaticResource Card}" Margin="0,0,0,8">
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                            <Border Grid.Column="0"
+                                    BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                    WidthRequest="52" HeightRequest="52"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                                <Label Text="{Binding Emoji}" FontSize="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding Nom}"
+                                       FontSize="14" FontAttributes="Bold" />
+                                <Label Text="{Binding CodeBarres}"
+                                       FontSize="11"
+                                       TextColor="{StaticResource OnSurfaceVariant}" />
+                                <Label Text="{Binding StatutStock}"
+                                       FontSize="11"
+                                       TextColor="{StaticResource Success}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2"
+                                   Text="{Binding Prix, StringFormat='{0:N0} F'}"
+                                   FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                            <Button Grid.Column="3" Text="+"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RechercheViewModel}}, Path=AjouterCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                    TextColor="{StaticResource Primary}"
+                                    WidthRequest="36" HeightRequest="36"
+                                    CornerRadius="10" FontSize="18" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
