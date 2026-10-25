@@ -11,6 +11,7 @@
     <VerticalStackLayout Padding="16" Spacing="12">
         <Label Text="Historique des ventes" FontSize="20" FontAttributes="Bold" />
         <Label Text="Toutes vos ventes récentes" Style="{StaticResource Caption}" />
+        <Label Text="{Binding Erreur}" Style="{StaticResource Caption}" />
 
         <CollectionView ItemsSource="{Binding Ventes}">
             <CollectionView.ItemTemplate>
@@ -21,13 +22,17 @@
                                     BackgroundColor="{StaticResource SurfaceContainerLow}"
                                     WidthRequest="44" HeightRequest="44"
                                     StrokeThickness="0" StrokeShape="RoundRectangle 10">
-                                <Label Text="{Binding Emoji}" FontSize="20"
+                                <Image Source="inventory.svg" WidthRequest="24" HeightRequest="24"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{Binding NomProduit}"
                                        FontSize="14" FontAttributes="Bold" />
                                 <Label Text="{Binding Minutes, StringFormat='Il y a {0} min'}"
+                                       Style="{StaticResource Caption}" />
+                                <Label Text="{Binding Quantite, StringFormat='Quantité : {0}'}"
+                                       Style="{StaticResource Caption}" />
+                                <Label Text="{Binding ModePaiement, StringFormat='Paiement : {0}'}"
                                        Style="{StaticResource Caption}" />
                             </VerticalStackLayout>
                             <Label Grid.Column="2"

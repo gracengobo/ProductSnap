@@ -19,7 +19,7 @@
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 0,0,16,16">
                     <Grid>
-                        <Label Text="🌾" FontSize="72"
+                        <Image Source="inventory.svg" WidthRequest="80" HeightRequest="80"
                                HorizontalOptions="Center" VerticalOptions="Center" />
 
                         <!-- Badge reconnaissance -->
@@ -28,12 +28,12 @@
                                 HorizontalOptions="Start" VerticalOptions="Start"
                                 Margin="12"
                                 StrokeShape="RoundRectangle 20">
-                            <Label Text="✓ Reconnu 98%" TextColor="White"
+                            <Label Text="Produit du catalogue local" TextColor="White"
                                    FontSize="11" FontAttributes="Bold" />
                         </Border>
 
                         <!-- Bouton fermer -->
-                        <Button Text="✖"
+                        <Button ImageSource="close.svg"
                                 Command="{Binding FermerCommand}"
                                 BackgroundColor="#CCFFFFFF"
                                 TextColor="{StaticResource OnSurface}"
@@ -59,17 +59,26 @@
                                 StrokeThickness="0" Padding="12"
                                 StrokeShape="RoundRectangle 10">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="PRIX DE VENTE EFFECTIF (FIFO)"
+                                <Label Text="PRIX DE VENTE"
                                        FontSize="10" FontAttributes="Bold"
                                        TextColor="{StaticResource Secondary}" />
                                 <Label Text="{Binding PrixEffectif, StringFormat='{0:N0} F CFA'}"
                                        FontSize="28" FontAttributes="Bold"
                                        TextColor="{StaticResource Primary}" />
+                                <Button Text="Modifier le prix"
+                                        Command="{Binding ModifierPrixCommand}"
+                                        HorizontalOptions="Start"
+                                        BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                                        TextColor="{StaticResource Primary}" />
                             </VerticalStackLayout>
                         </Border>
 
                         <!-- Titre lots -->
                         <Label Text="Lots en stock" Style="{StaticResource H2}" />
+                        <Button Text="Réapprovisionner le stock"
+                                Command="{Binding AjouterStockCommand}"
+                                BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                TextColor="{StaticResource Primary}" />
 
                         <!-- Liste des lots -->
                         <CollectionView ItemsSource="{Binding Lots}">
@@ -157,7 +166,7 @@
                     BackgroundColor="{StaticResource SurfaceContainerLow}"
                     TextColor="{StaticResource Secondary}"
                     CornerRadius="10" HeightRequest="48" Padding="16,0" />
-            <Button Grid.Column="1" Text="🛒 Enregistrer la vente"
+            <Button Grid.Column="1" Text="Enregistrer la vente"
                     Command="{Binding EnregistrerVenteCommand}"
                     BackgroundColor="{StaticResource TertiaryContainer}"
                     TextColor="{StaticResource TertiaryFixed}"

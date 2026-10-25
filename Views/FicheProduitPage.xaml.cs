@@ -9,4 +9,11 @@ public partial class FicheProduitPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is FicheProduitViewModel viewModel)
+            await viewModel.ChargerAsync();
+    }
 }

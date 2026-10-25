@@ -4,6 +4,10 @@
 <dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>ProductSnap utilise l'appareil photo pour lire le code-barres des produits.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>ProductSnap accède à une photo choisie pour lire le code-barres d'un produit.</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>

@@ -15,14 +15,16 @@
                 StrokeThickness="0" Padding="12,4"
                 StrokeShape="RoundRectangle 12">
             <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
-                <Label Grid.Column="0" Text="🔍" FontSize="18"
+                <Image Grid.Column="0" Source="search.svg" WidthRequest="20" HeightRequest="20"
                        VerticalOptions="Center" />
                 <Entry Grid.Column="1" Placeholder="Nom, code-barres, catégorie..."
                        Text="{Binding Recherche}"
                        BackgroundColor="Transparent" />
-                <Label Grid.Column="2" Text="🎤" FontSize="18"
+                <Button Grid.Column="2" Text="Scanner"
+                       Command="{Binding OuvrirScannerCommand}"
                        VerticalOptions="Center" />
-                <Label Grid.Column="3" Text="📷" FontSize="18"
+                <Button Grid.Column="3" Text="Ajouter"
+                       Command="{Binding AjouterNouveauCommand}"
                        VerticalOptions="Center" />
             </Grid>
         </Border>
@@ -30,27 +32,14 @@
         <!-- Chips catégories -->
         <ScrollView Orientation="Horizontal">
             <HorizontalStackLayout Spacing="8">
-                <Border BackgroundColor="{StaticResource Primary}"
-                        StrokeThickness="0" Padding="14,6"
-                        StrokeShape="RoundRectangle 16">
-                    <Label Text="Tous" TextColor="White"
-                           FontSize="12" FontAttributes="Bold" />
-                </Border>
-                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
-                        StrokeThickness="0" Padding="14,6"
-                        StrokeShape="RoundRectangle 16">
-                    <Label Text="Alimentaire" FontSize="12" />
-                </Border>
-                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
-                        StrokeThickness="0" Padding="14,6"
-                        StrokeShape="RoundRectangle 16">
-                    <Label Text="Boisson" FontSize="12" />
-                </Border>
-                <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
-                        StrokeThickness="0" Padding="14,6"
-                        StrokeShape="RoundRectangle 16">
-                    <Label Text="Hygiène" FontSize="12" />
-                </Border>
+                <Button Text="Tous" Command="{Binding ChoisirCategorieCommand}"
+                        CommandParameter="Tous" Padding="14,6" CornerRadius="16" />
+                <Button Text="Alimentaire" Command="{Binding ChoisirCategorieCommand}"
+                        CommandParameter="Alimentaire" Padding="14,6" CornerRadius="16" />
+                <Button Text="Boisson" Command="{Binding ChoisirCategorieCommand}"
+                        CommandParameter="Boisson" Padding="14,6" CornerRadius="16" />
+                <Button Text="Hygiène" Command="{Binding ChoisirCategorieCommand}"
+                        CommandParameter="Hygiène" Padding="14,6" CornerRadius="16" />
             </HorizontalStackLayout>
         </ScrollView>
 
@@ -60,7 +49,7 @@
                    Text="{Binding NbResultats, StringFormat='{0} articles répertoriés'}"
                    FontSize="11" FontAttributes="Bold"
                    TextColor="{StaticResource OnSurfaceVariant}" />
-            <Label Grid.Column="1" Text="Tri standard"
+            <Label Grid.Column="1" Text="{Binding Statut}"
                    FontSize="11" TextColor="{StaticResource Secondary}" />
         </Grid>
 
@@ -74,12 +63,18 @@
                                     BackgroundColor="{StaticResource SurfaceContainerLow}"
                                     WidthRequest="52" HeightRequest="52"
                                     StrokeThickness="0" StrokeShape="RoundRectangle 10">
-                                <Label Text="{Binding Emoji}" FontSize="24"
+                                <Image Source="inventory.svg" WidthRequest="28" HeightRequest="28"
                                        HorizontalOptions="Center" VerticalOptions="Center" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{Binding Nom}"
-                                       FontSize="14" FontAttributes="Bold" />
+                                       FontSize="14" FontAttributes="Bold">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RechercheViewModel}}, Path=OuvrirProduitCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                                 <Label Text="{Binding CodeBarres}"
                                        FontSize="11"
                                        TextColor="{StaticResource OnSurfaceVariant}" />
@@ -92,7 +87,7 @@
                                    FontSize="14" FontAttributes="Bold"
                                    TextColor="{StaticResource Primary}"
                                    VerticalOptions="Center" />
-                            <Button Grid.Column="3" Text="+"
+                            <Button Grid.Column="3" Text="Vendre"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RechercheViewModel}}, Path=AjouterCommand}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="{StaticResource SurfaceContainerLow}"

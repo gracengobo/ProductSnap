@@ -9,4 +9,11 @@ public partial class AccueilPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is AccueilViewModel viewModel)
+            await viewModel.ChargerAsync();
+    }
 }

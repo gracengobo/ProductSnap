@@ -40,23 +40,27 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="12">
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="📧" FontSize="18" />
-                            <Label Grid.Column="1" Text="martial@boutique.cm"
+                            <Image Grid.Column="0" Source="mail.svg" WidthRequest="20" HeightRequest="20" />
+                            <Label Grid.Column="1" Text="{Binding Email}"
                                    VerticalOptions="Center" />
                             <Label Grid.Column="2" Text="›" FontSize="20"
                                    TextColor="{StaticResource OnSurfaceVariant}" />
                         </Grid>
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="📱" FontSize="18" />
-                            <Label Grid.Column="1" Text="+237 6 99 12 34 56"
+                            <Image Grid.Column="0" Source="smartphone.svg" WidthRequest="20" HeightRequest="20" />
+                            <Label Grid.Column="1" Text="{Binding Telephone}"
                                    VerticalOptions="Center" />
                             <Label Grid.Column="2" Text="›" FontSize="20"
                                    TextColor="{StaticResource OnSurfaceVariant}" />
                         </Grid>
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="🔐" FontSize="18" />
+                            <Image Grid.Column="0" Source="key.svg" WidthRequest="20" HeightRequest="20" />
                             <Label Grid.Column="1" Text="Changer le mot de passe"
-                                   VerticalOptions="Center" />
+                                   VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ChangerMotDePasseCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                             <Label Grid.Column="2" Text="›" FontSize="20"
                                    TextColor="{StaticResource OnSurfaceVariant}" />
                         </Grid>
@@ -69,19 +73,19 @@
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="12">
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="🌐" FontSize="18" />
+                            <Image Grid.Column="0" Source="globe.svg" WidthRequest="20" HeightRequest="20" />
                             <Label Grid.Column="1" Text="Langue — Français"
                                    VerticalOptions="Center" />
                         </Grid>
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="📶" FontSize="18" />
+                            <Image Grid.Column="0" Source="wifi.svg" WidthRequest="20" HeightRequest="20" />
                             <Label Grid.Column="1" Text="Mode hors-ligne"
                                    VerticalOptions="Center" />
                             <Switch Grid.Column="2" IsToggled="True"
                                     OnColor="{StaticResource Secondary}" />
                         </Grid>
                         <Grid ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="🔔" FontSize="18" />
+                            <Image Grid.Column="0" Source="bell.svg" WidthRequest="20" HeightRequest="20" />
                             <Label Grid.Column="1" Text="Notifications"
                                    VerticalOptions="Center" />
                             <Switch Grid.Column="2" IsToggled="True"
@@ -90,7 +94,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Button Text="🚪 Se déconnecter"
+                <Button Text="Se déconnecter" ImageSource="logout.svg"
                         Command="{Binding SeDeconnecterCommand}"
                         BackgroundColor="{StaticResource Error}"
                         TextColor="White"

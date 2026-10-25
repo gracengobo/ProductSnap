@@ -9,4 +9,11 @@ public partial class RecherchePage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is RechercheViewModel viewModel)
+            await viewModel.ChargerAsync();
+    }
 }

@@ -18,13 +18,13 @@
                         FontSize="20" WidthRequest="44" HeightRequest="44"
                         CornerRadius="12" />
                 <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
-                    <Label Text="VISION IA" FontSize="10" FontAttributes="Bold"
+                    <Label Text="LECTURE EAN / UPC" FontSize="10" FontAttributes="Bold"
                            TextColor="{StaticResource Secondary}"
                            HorizontalOptions="Center" />
                     <Label Text="Scanner un produit" FontSize="16" FontAttributes="Bold" />
                 </VerticalStackLayout>
-                <Button Grid.Column="2" Text="⚡"
-                        Command="{Binding ToggleFlashCommand}"
+                <Button Grid.Column="2" Text="Saisie"
+                        Command="{Binding SaisieManuelleCommand}"
                         BackgroundColor="{StaticResource SurfaceContainerHigh}"
                         TextColor="{StaticResource OnSurfaceVariant}"
                         FontSize="20" WidthRequest="44" HeightRequest="44"
@@ -33,10 +33,10 @@
 
             <!-- Instructions -->
             <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
-                <Label Text="Prenez une photo du produit"
+                <Label Text="Scannez le code-barres"
                        FontSize="16" FontAttributes="Bold"
                        HorizontalOptions="Center" />
-                <Label Text="Cadrez bien le produit ou son code-barres"
+                <Label Text="Cadrez un code EAN-13 / UPC-A lisible"
                        FontSize="12"
                        TextColor="{StaticResource OnSurfaceVariant}"
                        HorizontalOptions="Center" />
@@ -48,12 +48,11 @@
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 12">
                 <Grid>
-                    <!-- Image de fond (placeholder) -->
-                    <Label Text="📷" FontSize="80"
+                    <Label Text="BARCODE"
+                           FontSize="24" FontAttributes="Bold"
                            TextColor="#66FFFFFF"
                            HorizontalOptions="Center" VerticalOptions="Center" />
 
-                    <!-- Badge "Détection IA active" -->
                     <Border BackgroundColor="#F9F9FF"
                             StrokeThickness="0"
                             Padding="10,5"
@@ -63,21 +62,10 @@
                         <HorizontalStackLayout Spacing="6">
                             <Ellipse Fill="{StaticResource Secondary}"
                                      WidthRequest="8" HeightRequest="8" />
-                            <Label Text="Détection IA active"
+                            <Label Text="Décodage local hors ligne"
                                    FontSize="11" FontAttributes="Bold"
                                    TextColor="{StaticResource Primary}" />
                         </HorizontalStackLayout>
-                    </Border>
-
-                    <!-- Badge latence -->
-                    <Border BackgroundColor="#CC293040"
-                            StrokeThickness="0"
-                            Padding="10,5"
-                            HorizontalOptions="End" VerticalOptions="Start"
-                            Margin="12"
-                            StrokeShape="RoundRectangle 20">
-                        <Label Text="⚡ 24 ms"
-                               FontSize="11" TextColor="White" />
                     </Border>
 
                     <!-- Cadre de visée -->
@@ -115,7 +103,7 @@
             </Border>
 
             <!-- Bouton principal -->
-            <Button Text="📷 PRENDRE UNE PHOTO"
+            <Button Text="PRENDRE UNE PHOTO DU CODE"
                     Command="{Binding PrendrePhotoCommand}"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="White"
@@ -125,19 +113,24 @@
 
             <!-- Boutons secondaires -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                <Button Grid.Column="0" Text="🖼️ Galerie"
+                <Button Grid.Column="0" Text="Choisir une photo"
                         Command="{Binding OuvrirGalerieCommand}"
                         BackgroundColor="{StaticResource SurfaceContainerLow}"
                         TextColor="{StaticResource OnSurface}"
                         CornerRadius="12"
                         HeightRequest="48" />
-                <Button Grid.Column="1" Text="⌨️ Saisie man."
+                <Button Grid.Column="1" Text="Saisie du code"
                         Command="{Binding SaisieManuelleCommand}"
                         BackgroundColor="{StaticResource SurfaceContainerLow}"
                         TextColor="{StaticResource OnSurface}"
                         CornerRadius="12"
                         HeightRequest="48" />
             </Grid>
+
+            <Label Text="{Binding Message}"
+                   FontSize="12"
+                   TextColor="{StaticResource OnSurfaceVariant}"
+                   HorizontalTextAlignment="Center" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -18,22 +18,22 @@
     <!-- Onglets principaux de l'application -->
     <TabBar Route="main">
 
-        <Tab Title="Accueil" Icon="home.png">
+        <Tab Title="Accueil" Icon="home.svg">
             <ShellContent Route="accueil"
                            ContentTemplate="{DataTemplate views:AccueilPage}" />
         </Tab>
 
-        <Tab Title="Scan" Icon="scan.png">
+        <Tab Title="Scan" Icon="scan.svg">
             <ShellContent Route="scanner"
                            ContentTemplate="{DataTemplate views:ScannerPage}" />
         </Tab>
 
-        <Tab Title="Ventes" Icon="sales.png">
+        <Tab Title="Ventes" Icon="sales.svg">
             <ShellContent Route="historiqueVentes"
                            ContentTemplate="{DataTemplate views:HistoriqueVentesPage}" />
         </Tab>
 
-        <Tab Title="Profil" Icon="profile.png">
+        <Tab Title="Profil" Icon="profile.svg">
             <ShellContent Route="profil"
                            ContentTemplate="{DataTemplate views:ProfilPage}" />
         </Tab>

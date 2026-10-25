@@ -19,7 +19,8 @@ public static class MauiProgram
             });
 
         // Services
-        builder.Services.AddSingleton<MockDataService>();
+        builder.Services.AddSingleton<LocalDataService>();
+        builder.Services.AddSingleton<IBarcodeImageDecoder, BarcodeImageDecoder>();
 
         // ViewModels
         builder.Services.AddTransient<ViewModels.ConnexionViewModel>();
@@ -32,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ViewModels.HistoriquePrixViewModel>();
         builder.Services.AddTransient<ViewModels.HistoriqueVentesViewModel>();
         builder.Services.AddTransient<ViewModels.ProfilViewModel>();
+        builder.Services.AddTransient<ViewModels.AjouterProduitViewModel>();
 
         // Views
         builder.Services.AddTransient<Views.ConnexionPage>();
@@ -44,6 +46,7 @@ public static class MauiProgram
         builder.Services.AddTransient<Views.HistoriquePrixPage>();
         builder.Services.AddTransient<Views.HistoriqueVentesPage>();
         builder.Services.AddTransient<Views.ProfilPage>();
+        builder.Services.AddTransient<Views.AjouterProduitPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

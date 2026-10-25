@@ -12,12 +12,12 @@
 
             <!-- Barre supérieure -->
             <Grid ColumnDefinitions="Auto,*,Auto">
-                <Label Grid.Column="0" Text="🧾" FontSize="22"
+                <Image Grid.Column="0" Source="receipt.svg" WidthRequest="24" HeightRequest="24"
                        VerticalOptions="Center" />
                 <Label Grid.Column="1" Text="Confirmer la vente"
                        FontSize="16" FontAttributes="Bold"
                        VerticalOptions="Center" Margin="8,0" />
-                <Button Grid.Column="2" Text="✖"
+                <Button Grid.Column="2" ImageSource="close.svg"
                         Command="{Binding FermerCommand}"
                         BackgroundColor="{StaticResource SurfaceContainerLow}"
                         TextColor="{StaticResource OnSurfaceVariant}"
@@ -72,7 +72,7 @@
                         <TapGestureRecognizer Command="{Binding ChoisirEspecesCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout Spacing="4">
-                        <Label Text="💵" FontSize="24" />
+                        <Image Source="banknote.svg" WidthRequest="28" HeightRequest="28" />
                         <Label Text="Espèces" FontAttributes="Bold" />
                         <Label Text="Rendu monnaie" Style="{StaticResource Caption}" />
                     </VerticalStackLayout>
@@ -86,7 +86,7 @@
                         <TapGestureRecognizer Command="{Binding ChoisirMobileMoneyCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout Spacing="4">
-                        <Label Text="📱" FontSize="24" />
+                        <Image Source="smartphone.svg" WidthRequest="28" HeightRequest="28" />
                         <Label Text="Mobile Money" FontAttributes="Bold" />
                         <Label Text="OM / MTN" Style="{StaticResource Caption}" />
                     </VerticalStackLayout>
@@ -100,7 +100,7 @@
                         <TapGestureRecognizer Command="{Binding ChoisirCarteCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout Spacing="4">
-                        <Label Text="💳" FontSize="24" />
+                        <Image Source="creditcard.svg" WidthRequest="28" HeightRequest="28" />
                         <Label Text="Carte bancaire" FontAttributes="Bold" />
                         <Label Text="TPE" Style="{StaticResource Caption}" />
                     </VerticalStackLayout>
@@ -114,7 +114,7 @@
                         <TapGestureRecognizer Command="{Binding ChoisirCreditCommand}" />
                     </Border.GestureRecognizers>
                     <VerticalStackLayout Spacing="4">
-                        <Label Text="🏦" FontSize="24" />
+                        <Image Source="landmark.svg" WidthRequest="28" HeightRequest="28" />
                         <Label Text="Crédit client" FontAttributes="Bold" />
                         <Label Text="Différé" Style="{StaticResource Caption}" />
                     </VerticalStackLayout>
@@ -147,8 +147,9 @@
             </Border>
 
             <!-- Boutons -->
-            <Button Text="✓ Valider la vente"
+            <Button Text="Valider la vente"
                     Command="{Binding ValiderCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
                     BackgroundColor="{StaticResource TertiaryContainer}"
                     TextColor="White"
                     FontAttributes="Bold"

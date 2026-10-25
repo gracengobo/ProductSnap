@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProductSnap.Maui.Services;
 
 namespace ProductSnap.Maui.ViewModels;
 
@@ -10,10 +11,13 @@ public partial class ConnexionViewModel : ObservableObject
     [ObservableProperty] public partial string MessageErreur { get; set; }
     [ObservableProperty] public partial bool HasErreur { get; set; }
 
-    public ConnexionViewModel()
+    private readonly LocalDataService _dataService;
+
+    public ConnexionViewModel(LocalDataService dataService)
     {
-        Email = "martial@boutique.cm";
-        MotDePasse = "123456";
+        _dataService = dataService;
+        Email = "";
+        MotDePasse = "";
         MessageErreur = "";
         HasErreur = false;
     }
@@ -28,11 +32,25 @@ public partial class ConnexionViewModel : ObservableObject
             return;
         }
 
-        HasErreur = false;
-        await Task.Delay(500);
+        try
+        {
+            HasErreur = false;
+            var connected = await _dataService.SignInAsync(Email.Trim(), MotDePasse);
+            if (!connected)
+            {
+                MessageErreur = "Identifiant ou mot de passe incorrect.";
+                HasErreur = true;
+                return;
+            }
 
-        
-        await Shell.Current.GoToAsync("//accueil");
+            MotDePasse = "";
+            await Shell.Current.GoToAsync("//main/accueil");
+        }
+        catch (Exception exception)
+        {
+            MessageErreur = $"Connexion impossible : {exception.Message}";
+            HasErreur = true;
+        }
     }
 
     [RelayCommand]

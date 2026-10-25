@@ -9,4 +9,11 @@ public partial class VentePage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is VenteViewModel viewModel)
+            await viewModel.ChargerAsync();
+    }
 }

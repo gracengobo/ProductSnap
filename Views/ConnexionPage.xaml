@@ -19,9 +19,8 @@
                             StrokeThickness="0"
                             WidthRequest="52" HeightRequest="52"
                             StrokeShape="RoundRectangle 14">
-                        <Label Text="📷" FontSize="24"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                        <Image Source="cameralight.svg" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <Label Text="ProductSnap" FontSize="18"
                            FontAttributes="Bold" TextColor="White"
@@ -46,14 +45,14 @@
                     <Label Text="IDENTIFIANT CAISSE"
                            FontSize="9" FontAttributes="Bold"
                            TextColor="{StaticResource OnSurfaceVariant}" />
-                    <Entry Placeholder="📧 Email ou téléphone"
+                    <Entry Placeholder="Email ou téléphone"
                            BackgroundColor="{StaticResource SurfaceContainerLow}"
                            Text="{Binding Email}" />
 
                     <Label Text="CODE CONFIDENTIEL"
                            FontSize="9" FontAttributes="Bold"
                            TextColor="{StaticResource OnSurfaceVariant}" />
-                    <Entry Placeholder="🔒 Mot de passe"
+                    <Entry Placeholder="Mot de passe"
                            IsPassword="True"
                            BackgroundColor="{StaticResource SurfaceContainerLow}"
                            Text="{Binding MotDePasse}" />
